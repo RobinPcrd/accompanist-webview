@@ -38,8 +38,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import io.github.prob.accompanist.web.WebView
-import io.github.prob.accompanist.web.rememberWebViewStateWithHTMLData
+import io.github.robinpcrd.accompanist.web.WebView
+import io.github.robinpcrd.accompanist.web.rememberWebViewStateWithHTMLData
 import kotlinx.coroutines.launch
 
 class WrappedContentWebViewSample : ComponentActivity() {

@@ -28,7 +28,7 @@ kotlin {
 }
 
 android {
-    namespace = "io.github.prob.accompanist.web"
+    namespace = "io.github.robinpcrd.accompanist.web"
 
     compileSdk = 34
 

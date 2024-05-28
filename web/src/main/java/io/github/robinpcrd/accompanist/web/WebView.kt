@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.prob.accompanist.web
+package io.github.robinpcrd.accompanist.web
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -45,8 +45,8 @@ import androidx.compose.runtime.snapshotFlow
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.viewinterop.AndroidView
-import io.github.prob.accompanist.web.LoadingState.Finished
-import io.github.prob.accompanist.web.LoadingState.Loading
+import io.github.robinpcrd.accompanist.web.LoadingState.Finished
+import io.github.robinpcrd.accompanist.web.LoadingState.Loading
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow

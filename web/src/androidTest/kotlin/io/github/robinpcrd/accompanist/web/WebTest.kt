@@ -16,7 +16,7 @@
 
 @file:Suppress("DEPRECATION")
 
-package io.github.prob.accompanist.web
+package io.github.robinpcrd.accompanist.web
 
 import android.content.Context
 import android.graphics.Bitmap

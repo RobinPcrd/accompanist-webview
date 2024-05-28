@@ -24,7 +24,7 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.google.accompanist.sample"
+        applicationId = "io.github.robinpcrd.accompanist.sample"
         minSdk = 21
         targetSdk = 33
 
