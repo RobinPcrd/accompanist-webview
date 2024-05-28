@@ -1,3 +1,7 @@
+import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 /*
  * Copyright 2020 The Android Open Source Project
  *
@@ -42,7 +46,7 @@ plugins {
 apply plugin: 'com.dropbox.affectedmoduledetector'
 apply plugin: 'com.diffplug.spotless'
 
-tasks.withType(org.jetbrains.dokka.gradle.DokkaMultiModuleTask).configureEach {
+tasks.withType(DokkaMultiModuleTask).configureEach {
     outputDirectory = rootProject.file('docs/api')
     failOnWarning = true
 }
@@ -121,16 +125,16 @@ subprojects {
         }
     }
 
-    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach { compile ->
-        kotlinOptions {
+    tasks.withType(KotlinCompile).configureEach { compile ->
+        compilerOptions {
             // Treat all Kotlin warnings as errors
             allWarningsAsErrors = true
             // Set JVM target to 1.8
-            jvmTarget = "1.8"
+            jvmTarget = JvmTarget.JVM_1_8
             // Allow use of @OptIn
-            freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
+            freeCompilerArgs.add("-opt-in=kotlin.RequiresOptIn")
             // Enable default methods in interfaces
-            freeCompilerArgs += "-Xjvm-default=all"
+            freeCompilerArgs.add("-Xjvm-default=all")
         }
     }
 
