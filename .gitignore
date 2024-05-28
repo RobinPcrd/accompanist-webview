@@ -18,6 +18,10 @@ captures
 .idea/deploymentTargetDropDown.xml
 .idea/misc.xml
 .idea/androidTestResultsUserPreferences.xml
+.idea/.name
+.idea/deploymentTargetSelector.xml
+.idea/migrations.xml
+.idea/other.xml
 gradle.xml
 *.iml
 
