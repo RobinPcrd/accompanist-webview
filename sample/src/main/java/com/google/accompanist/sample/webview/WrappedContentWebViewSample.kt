@@ -19,7 +19,6 @@
 package com.google.accompanist.sample.webview
 
 import android.os.Bundle
-import android.webkit.WebView
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
@@ -39,8 +38,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.web.WebView
-import com.google.accompanist.web.rememberWebViewStateWithHTMLData
+import io.github.prob.accompanist.web.WebView
+import io.github.prob.accompanist.web.rememberWebViewStateWithHTMLData
 import kotlinx.coroutines.launch
 
 class WrappedContentWebViewSample : ComponentActivity() {
@@ -93,7 +92,8 @@ fun WrappingWebContent(
     )
     WebView(
         state = webViewState,
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
             .heightIn(min = 1.dp), // A bottom sheet can't support content with 0 height.
         captureBackPresses = false,
     )

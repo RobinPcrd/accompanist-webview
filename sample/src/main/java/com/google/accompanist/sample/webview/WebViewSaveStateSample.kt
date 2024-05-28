@@ -37,10 +37,10 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.google.accompanist.web.WebView
-import com.google.accompanist.web.rememberSaveableWebViewState
-import com.google.accompanist.web.rememberWebViewNavigator
-import com.google.accompanist.web.rememberWebViewState
+import io.github.prob.accompanist.web.WebView
+import io.github.prob.accompanist.web.rememberSaveableWebViewState
+import io.github.prob.accompanist.web.rememberWebViewNavigator
+import io.github.prob.accompanist.web.rememberWebViewState
 
 class WebViewSaveStateSample : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

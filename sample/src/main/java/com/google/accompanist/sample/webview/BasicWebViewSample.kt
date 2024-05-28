@@ -54,11 +54,11 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.sample.AccompanistSampleTheme
-import com.google.accompanist.web.AccompanistWebViewClient
-import com.google.accompanist.web.LoadingState
-import com.google.accompanist.web.WebView
-import com.google.accompanist.web.rememberWebViewNavigator
-import com.google.accompanist.web.rememberWebViewState
+import io.github.prob.accompanist.web.AccompanistWebViewClient
+import io.github.prob.accompanist.web.LoadingState
+import io.github.prob.accompanist.web.WebView
+import io.github.prob.accompanist.web.rememberWebViewNavigator
+import io.github.prob.accompanist.web.rememberWebViewState
 
 class BasicWebViewSample : ComponentActivity() {
     val initialUrl = "https://google.com"

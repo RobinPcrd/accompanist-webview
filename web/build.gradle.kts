@@ -28,7 +28,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.google.accompanist.web"
+    namespace = "io.github.prob.accompanist.web"
 
     compileSdk = 34
 
@@ -101,7 +101,6 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime)
     implementation(libs.androidx.activity.compose)
 
-    // TODO: Remove when fixed https://github.com/gradle/gradle/issues/24037
     implementation(libs.kotlin.coroutines.android)
     implementation(libs.androidx.lifecycle.common)
 

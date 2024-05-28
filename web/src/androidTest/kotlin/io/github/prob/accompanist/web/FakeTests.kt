@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.accompanist.web
+package io.github.prob.accompanist.web
 
 import org.junit.Test
 import org.junit.runner.RunWith
