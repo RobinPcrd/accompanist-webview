@@ -57,24 +57,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":adaptive"))
-    implementation(project(":drawablepainter"))
-    implementation(project(":insets-ui"))
-    implementation(project(":navigation-animation"))
-    implementation(project(":navigation-material"))
-    implementation(project(":pager"))
-    implementation(project(":pager-indicators"))
-    implementation(project(":permissions"))
-    implementation(project(":placeholder"))
-    implementation(project(":placeholder-material"))
-    implementation(project(":flowlayout"))
-    implementation(project(":systemuicontroller"))
-    implementation(project(":swiperefresh"))
-    implementation(project(":testharness")) // Don't use in production! Use the configurations below
-    testImplementation(project(":testharness"))
-    androidTestImplementation(project(":testharness"))
-    implementation(project(":themeadapter-material"))
-    implementation(project(":themeadapter-material3"))
     implementation(project(":web"))
 
     implementation(libs.androidx.appcompat)
@@ -98,7 +80,7 @@ dependencies {
     implementation(libs.androidx.fragment)
     implementation(libs.androidx.lifecycle.runtime)
 
-    implementation(libs.kotlin.stdlib)
+    implementation(libs.androidx.navigation.compose)
 
-    lintChecks(project(":permissions-lint"))
+    implementation(libs.kotlin.stdlib)
 }

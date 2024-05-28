@@ -25,29 +25,8 @@ gradleEnterprise {
     }
 }
 
-include(":adaptive")
 include(":internal-testutils")
-include(":insets-ui")
-include(":appcompat-theme")
-include(":drawablepainter")
-include(":navigation-animation")
-include(":navigation-material")
-include(":pager")
-include(":pager-indicators")
-include(":permissions")
-include(":permissions-lint")
-include(":placeholder")
-include(":placeholder-material")
-include(":placeholder-material3")
-include(":flowlayout")
-include(":systemuicontroller")
-include(":swiperefresh")
 include(":sample")
-include(":testharness")
-include(":themeadapter-core")
-include(":themeadapter-appcompat")
-include(":themeadapter-material")
-include(":themeadapter-material3")
 include(":web")
 
 rootProject.name = "accompanist"
