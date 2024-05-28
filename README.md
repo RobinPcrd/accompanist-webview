@@ -43,56 +43,8 @@ For stable versions of Compose, we use the latest *stable* version of the Compos
 
 ## Libraries
 
-### 📫 [Permissions](./permissions/)
-A library that provides [Android runtime permissions][runtimepermissions] support for Jetpack Compose.
-
-### 🖌️ [Drawable Painter](./drawablepainter/)
-A library which provides a way to use Android Drawables as Jetpack Compose Painters.
-
-### 📜 [Adaptive](./adaptive/)
-A library providing a collection of utilities for adaptive layouts.
-
-### ⬇️ [Swipe to Refresh](./swiperefresh/) (Deprecated)
-See our [Migration Guide](https://google.github.io/accompanist/swiperefresh/) for migrating to PullRefresh in Compose Material.
-
-### 🎨 [AppCompat Theme Adapter](./appcompat-theme/) (Deprecated)
-See our [Migration Guide](https://google.github.io/accompanist/appcompat-theme/) for migrating to the new artifact in Accompanist.
-
-### 📖 [Pager](./pager/) (Deprecated)
-See our [Migration Guide](https://google.github.io/accompanist/pager/) for migrating to Pager in Compose.
-
-### 🌊 [Flow Layouts](./flowlayout/) (Deprecated)
-See our [Migration Guide](https://google.github.io/accompanist/flowlayout/) for migrating to FlowLayout in Compose.
-
-### 🧭✨[Navigation-Animation](./navigation-animation/) (Deprecated)
-See our [Migration Guide](https://google.github.io/accompanist/navigation-animation/) for migrating to using built in support for animations in Jetpack Navigation Compose. 
-
-### 🧭🎨️ [Navigation-Material](./navigation-material/) (Deprecated)
-See our [Migration Guide](https://google.github.io/accompanist/navigation-material/) for migrating to using built in material-navigation support. 
-
-### ⏳ [Placeholder](./placeholder/) (Deprecated)
-A library that provides easy-to-use modifiers for displaying a placeholder UI while content is loading.
-
-### 🍫 [System UI Controller](./systemuicontroller/) (Deprecated)
-We recommend migrating to edge to edge. See our [Migration Guide](https://google.github.io/accompanist/systemuicontroller/) for more details.
-
-### 🎨 [AppCompat Theme Adapter](./themeadapter-appcompat/) (Deprecated)
-A library that enables the reuse of [AppCompat][appcompat] XML themes, for theming in Jetpack Compose.
-
-### 🎨 [Material Theme Adapter](./themeadapter-material/) (Deprecated)
-A library that enables the reuse of [MDC-Android][mdc] Material 2 XML themes, for theming in Jetpack Compose.
-
-### 🎨 [Material 3 Theme Adapter](./themeadapter-material3/) (Deprecated)
-A library that enables the reuse of [MDC-Android][mdc] Material 3 XML themes, for theming in Jetpack Compose.
-
-### 🌏 [Web](./web/) (Deprecated)
+### 🌏 [Web](./web/)
 A wrapper around WebView for basic WebView support in Jetpack Compose.
-
-### 🗜 [Test Harness](./testharness/) (Deprecated)
-Utilities for testing Compose layouts.
-
-### 📐 [Insets](./insets/) (Deprecated & Removed)
-See our [Migration Guide](https://google.github.io/accompanist/insets/) for migrating to Insets in Compose.
 
 ---
 
@@ -135,11 +87,3 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ```
-
-[appcompat]: https://developer.android.com/jetpack/androidx/releases/appcompat
-[compose]: https://developer.android.com/jetpack/compose
-[snap]: https://oss.sonatype.org/content/repositories/snapshots/com/google/accompanist/
-[mdc]: https://github.com/material-components/material-components-android
-[windowinsets]: https://developer.android.com/reference/kotlin/android/view/WindowInsets
-[viewpager]: https://developer.android.com/reference/kotlin/androidx/viewpager/widget/ViewPager
-[runtimepermissions]: https://developer.android.com/guide/topics/permissions/overview
