@@ -26,10 +26,7 @@ import android.view.View
 import android.widget.ListView
 import android.widget.SimpleAdapter
 import java.text.Collator
-import java.util.ArrayList
 import java.util.Collections
-import java.util.Comparator
-import java.util.HashMap
 
 /**
  * A [ListActivity] which automatically populates the list of sample activities in this app
@@ -127,6 +124,7 @@ class MainActivity : ListActivity() {
         data += temp
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onListItemClick(l: ListView, v: View, position: Int, id: Long) {
         val map = l.getItemAtPosition(position) as Map<*, *>
         val intent = map["intent"] as Intent?

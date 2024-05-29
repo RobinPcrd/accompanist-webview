@@ -18,6 +18,8 @@
 plugins {
     id(libs.plugins.android.library.get().pluginId)
     id(libs.plugins.android.kotlin.get().pluginId)
+
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -38,10 +40,6 @@ android {
     buildFeatures {
         buildConfig = false
         compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
     }
 
     lint {

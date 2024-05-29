@@ -23,6 +23,8 @@ plugins {
     id(libs.plugins.jetbrains.dokka.get().pluginId)
     id(libs.plugins.gradle.metalava.get().pluginId)
     id(libs.plugins.vanniktech.maven.publish.get().pluginId)
+
+    alias(libs.plugins.compose.compiler)
 }
 
 kotlin {
@@ -49,10 +51,6 @@ android {
     buildFeatures {
         buildConfig = false
         compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
     }
 
     lint {
