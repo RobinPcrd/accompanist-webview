@@ -15,6 +15,8 @@
  */
 @file:Suppress("UnstableApiUsage")
 
+import com.vanniktech.maven.publish.SonatypeHost
+
 plugins {
     id(libs.plugins.android.library.get().pluginId)
     id(libs.plugins.android.kotlin.get().pluginId)
@@ -132,4 +134,9 @@ dependencies {
     androidTestImplementation(libs.androidx.test.espressoWeb)
 
     androidTestImplementation(libs.squareup.mockwebserver)
+}
+
+mavenPublishing {
+    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL, automaticRelease = true)
+    signAllPublications()
 }
