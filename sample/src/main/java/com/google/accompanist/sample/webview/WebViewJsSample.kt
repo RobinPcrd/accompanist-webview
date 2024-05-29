@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 The Android Open Source Project
+ * Copyright 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,55 +21,28 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
+import io.github.robinpcrd.accompanist.web.LoadingState
 import io.github.robinpcrd.accompanist.web.WebView
 import io.github.robinpcrd.accompanist.web.rememberSaveableWebViewState
 import io.github.robinpcrd.accompanist.web.rememberWebViewNavigator
-import io.github.robinpcrd.accompanist.web.rememberWebViewState
 import kotlinx.coroutines.delay
 import kotlin.time.Duration.Companion.seconds
 
-class WebViewSaveStateSample : ComponentActivity() {
+class WebViewJsSample : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             MaterialTheme {
                 Surface {
-                    val navController = rememberNavController()
                     Column(Modifier.fillMaxSize()) {
-                        Row {
-                            Button(onClick = { navController.popBackStack() }) {
-                                Text("Home")
-                            }
-                            Button(onClick = { navController.navigate("detail") }) {
-                                Text("Detail")
-                            }
-                        }
-
-                        Spacer(modifier = Modifier.size(16.dp))
-
-                        NavHost(navController = navController, startDestination = "home") {
-                            composable("home") {
-                                Home()
-                            }
-                            composable("detail") {
-                                Detail()
-                            }
-                        }
+                        Home()
                     }
                 }
             }
@@ -91,12 +64,18 @@ private fun Home() {
         }
     }
 
-    LaunchedEffect(Unit) {
-        delay(5.seconds)
-        webViewState.webView?.evaluateJavascript(
-            "window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});",
-            null
-        )
+    LaunchedEffect(webViewState) {
+        snapshotFlow { webViewState.loadingState }
+            .collect {
+                // Scroll to bottom when finished loading
+                if (it is LoadingState.Finished) {
+                    delay(1.seconds)
+                    webViewState.webView?.evaluateJavascript(
+                        "window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});",
+                        null
+                    )
+                }
+            }
     }
 
     WebView(
@@ -106,15 +85,5 @@ private fun Home() {
         onCreated = {
             it.settings.javaScriptEnabled = true
         },
-    )
-}
-
-@Composable
-private fun Detail() {
-    val webViewState = rememberWebViewState(url = "https://google.com")
-
-    WebView(
-        state = webViewState,
-        modifier = Modifier.fillMaxSize()
     )
 }

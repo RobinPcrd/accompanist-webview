@@ -73,5 +73,14 @@
                 <category android:name="com.google.accompanist.sample.SAMPLE_CODE" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.google.accompanist.sample.webview.WebViewJsSample"
+            android:exported="true"
+            android:label="JS execution sample">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.google.accompanist.sample.SAMPLE_CODE" />
+            </intent-filter>
+        </activity>
     </application>
 </manifest>
