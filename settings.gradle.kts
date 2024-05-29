@@ -15,7 +15,8 @@
  */
 
 plugins {
-    id("com.gradle.enterprise").version("3.10.3")
+    id("com.gradle.enterprise") version "3.10.3"
+    id("de.fayard.refreshVersions") version "0.60.5"
 }
 
 gradleEnterprise {
