@@ -11,8 +11,9 @@ A wrapper around WebView for basic WebView support in Jetpack Compose.
 
 [//]: <> (## Snapshots)
 
-[//]: <> (Snapshots of the current development version of Accompanist are available, which track the
-latest commit. See [here](docs/using-snapshot-version.md) for more information.)
+[//]: <> (Snapshots of the current development version of Accompanist are available, which track the)
+
+[//]: <> (latest commit. See [here](docs/using-snapshot-version.md\) for more information.)
 
 ---
 
