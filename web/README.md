@@ -1,6 +1,6 @@
 # WebView wrapper for Jetpack Compose
 
-[![Maven Central](https://img.shields.io/maven-central/v/com.google.accompanist/accompanist-webview)](https://search.maven.org/search?q=g:com.google.accompanist)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.robinpcrd.accompanist/accompanist-webview)](https://central.sonatype.com/artifact/io.github.robinpcrd.accompanist/accompanist-webview)
 
 For more information, visit the documentation: https://google.github.io/accompanist/web/
 
@@ -24,10 +24,10 @@ repositories {
 }
 
 dependencies {
-    implementation "com.google.accompanist:accompanist-webview:<version>"
+    implementation "io.github.robinpcrd.accompanist:accompanist-webview:<version>"
 }
 ```
 
-Snapshots of the development version are available in [Sonatype's `snapshots` repository][snap]. These are updated on every commit.
+[//]: <> (Snapshots of the development version are available in [Sonatype's `snapshots` repository][snap]. These are updated on every commit.)
 
-  [snap]: https://oss.sonatype.org/content/repositories/snapshots/com/google/accompanist/accompanist-web/
+[//]: <> ([snap]: https://oss.sonatype.org/content/repositories/snapshots/com/google/accompanist/accompanist-web/)

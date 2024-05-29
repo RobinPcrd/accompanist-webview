@@ -1,5 +1,5 @@
 // Signature format: 4.0
-package com.google.accompanist.web {
+package io.github.robinpcrd.accompanist.web {
 
   public class AccompanistWebChromeClient extends android.webkit.WebChromeClient {
     ctor public AccompanistWebChromeClient();
@@ -38,7 +38,6 @@ package com.google.accompanist.web {
   }
 
   public abstract sealed class WebContent {
-    method @Deprecated public final String? getCurrentUrl();
   }
 
   public static final class WebContent.Data extends io.github.robinpcrd.accompanist.web.WebContent {
@@ -99,13 +98,13 @@ package com.google.accompanist.web {
   }
 
   public final class WebViewKt {
-    method @androidx.compose.runtime.Composable public static void WebView(io.github.robinpcrd.accompanist.web.WebViewState state, optional androidx.compose.ui.Modifier modifier, optional boolean captureBackPresses, optional io.github.robinpcrd.accompanist.web.WebViewNavigator navigator, optional kotlin.jvm.functions.Function1<? super android.webkit.WebView,kotlin.Unit> onCreated, optional kotlin.jvm.functions.Function1<? super android.webkit.WebView,kotlin.Unit> onDispose, optional io.github.robinpcrd.accompanist.web.AccompanistWebViewClient client, optional io.github.robinpcrd.accompanist.web.AccompanistWebChromeClient chromeClient, optional kotlin.jvm.functions.Function1<? super android.content.Context,? extends android.webkit.WebView>? factory);
     method @androidx.compose.runtime.Composable public static void WebView(io.github.robinpcrd.accompanist.web.WebViewState state, android.widget.FrameLayout.LayoutParams layoutParams, optional androidx.compose.ui.Modifier modifier, optional boolean captureBackPresses, optional io.github.robinpcrd.accompanist.web.WebViewNavigator navigator, optional kotlin.jvm.functions.Function1<? super android.webkit.WebView,kotlin.Unit> onCreated, optional kotlin.jvm.functions.Function1<? super android.webkit.WebView,kotlin.Unit> onDispose, optional io.github.robinpcrd.accompanist.web.AccompanistWebViewClient client, optional io.github.robinpcrd.accompanist.web.AccompanistWebChromeClient chromeClient, optional kotlin.jvm.functions.Function1<? super android.content.Context,? extends android.webkit.WebView>? factory);
+    method @androidx.compose.runtime.Composable public static void WebView(io.github.robinpcrd.accompanist.web.WebViewState state, optional androidx.compose.ui.Modifier modifier, optional boolean captureBackPresses, optional io.github.robinpcrd.accompanist.web.WebViewNavigator navigator, optional kotlin.jvm.functions.Function1<? super android.webkit.WebView,kotlin.Unit> onCreated, optional kotlin.jvm.functions.Function1<? super android.webkit.WebView,kotlin.Unit> onDispose, optional io.github.robinpcrd.accompanist.web.AccompanistWebViewClient client, optional io.github.robinpcrd.accompanist.web.AccompanistWebChromeClient chromeClient, optional kotlin.jvm.functions.Function1<? super android.content.Context,? extends android.webkit.WebView>? factory);
     method public static androidx.compose.runtime.saveable.Saver<io.github.robinpcrd.accompanist.web.WebViewState,java.lang.Object> getWebStateSaver();
     method @androidx.compose.runtime.Composable public static io.github.robinpcrd.accompanist.web.WebViewState rememberSaveableWebViewState();
     method @androidx.compose.runtime.Composable public static io.github.robinpcrd.accompanist.web.WebViewNavigator rememberWebViewNavigator(optional kotlinx.coroutines.CoroutineScope coroutineScope);
-    method @androidx.compose.runtime.Composable public static io.github.robinpcrd.accompanist.web.WebViewState rememberWebViewState(String url, optional java.util.Map<java.lang.String,java.lang.String> additionalHttpHeaders);
     method @androidx.compose.runtime.Composable public static io.github.robinpcrd.accompanist.web.WebViewState rememberWebViewState(String url, byte[] postData);
+    method @androidx.compose.runtime.Composable public static io.github.robinpcrd.accompanist.web.WebViewState rememberWebViewState(String url, optional java.util.Map<java.lang.String,java.lang.String> additionalHttpHeaders);
     method @androidx.compose.runtime.Composable public static io.github.robinpcrd.accompanist.web.WebViewState rememberWebViewStateWithHTMLData(String data, optional String? baseUrl, optional String encoding, optional String? mimeType, optional String? historyUrl);
     property public static final androidx.compose.runtime.saveable.Saver<io.github.robinpcrd.accompanist.web.WebViewState,java.lang.Object> WebStateSaver;
   }
@@ -134,6 +133,7 @@ package com.google.accompanist.web {
     method public android.graphics.Bitmap? getPageIcon();
     method public String? getPageTitle();
     method public android.os.Bundle? getViewState();
+    method public android.webkit.WebView? getWebView();
     method public boolean isLoading();
     method public void setContent(io.github.robinpcrd.accompanist.web.WebContent);
     property public final io.github.robinpcrd.accompanist.web.WebContent content;
@@ -144,6 +144,7 @@ package com.google.accompanist.web {
     property public final android.graphics.Bitmap? pageIcon;
     property public final String? pageTitle;
     property public final android.os.Bundle? viewState;
+    property public final android.webkit.WebView? webView;
   }
 
 }
