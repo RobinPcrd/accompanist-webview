@@ -34,12 +34,12 @@ kotlin {
 android {
     namespace = "io.github.robinpcrd.accompanist.web"
 
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         minSdk = 21
         // targetSdkVersion has no effect for libraries. This is only used for the test APK
-        targetSdk = 33
+        targetSdk = 36
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 

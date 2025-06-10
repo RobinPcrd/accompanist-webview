@@ -23,6 +23,7 @@ import android.util.Log
 import android.webkit.WebView
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -39,6 +40,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
@@ -66,6 +68,7 @@ class BasicWebViewSample : ComponentActivity() {
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         setContent {
             AccompanistSampleTheme {
                 val state = rememberWebViewState(url = initialUrl)
@@ -74,85 +77,89 @@ class BasicWebViewSample : ComponentActivity() {
                     mutableStateOf(state.lastLoadedUrl)
                 }
 
-                Column {
-                    TopAppBar(
-                        title = { Text(text = "WebView Sample") },
-                        navigationIcon = {
-                            if (navigator.canGoBack) {
-                                IconButton(onClick = { navigator.navigateBack() }) {
-                                    Icon(
-                                        imageVector = Icons.AutoMirrored.Default.ArrowBack,
-                                        contentDescription = "Back"
-                                    )
+                Scaffold(
+                    topBar = {
+                        TopAppBar(
+                            title = { Text(text = "WebView Sample") },
+                            navigationIcon = {
+                                if (navigator.canGoBack) {
+                                    IconButton(onClick = { navigator.navigateBack() }) {
+                                        Icon(
+                                            imageVector = Icons.AutoMirrored.Default.ArrowBack,
+                                            contentDescription = "Back"
+                                        )
+                                    }
                                 }
                             }
-                        }
-                    )
+                        )
+                    }
+                ) {
+                    Column(Modifier.padding(it)) {
+                        Row {
+                            Box(modifier = Modifier.weight(1f)) {
+                                if (state.errorsForCurrentRequest.isNotEmpty()) {
+                                    Image(
+                                        imageVector = Icons.Default.Error,
+                                        contentDescription = "Error",
+                                        colorFilter = ColorFilter.tint(Color.Red),
+                                        modifier = Modifier
+                                            .align(Alignment.CenterEnd)
+                                            .padding(8.dp)
+                                    )
+                                }
 
-                    Row {
-                        Box(modifier = Modifier.weight(1f)) {
-                            if (state.errorsForCurrentRequest.isNotEmpty()) {
-                                Image(
-                                    imageVector = Icons.Default.Error,
-                                    contentDescription = "Error",
-                                    colorFilter = ColorFilter.tint(Color.Red),
-                                    modifier = Modifier
-                                        .align(Alignment.CenterEnd)
-                                        .padding(8.dp)
+                                OutlinedTextField(
+                                    value = textFieldValue ?: "",
+                                    onValueChange = { textFieldValue = it },
+                                    modifier = Modifier.fillMaxWidth()
                                 )
                             }
 
-                            OutlinedTextField(
-                                value = textFieldValue ?: "",
-                                onValueChange = { textFieldValue = it },
-                                modifier = Modifier.fillMaxWidth()
+                            Button(
+                                onClick = {
+                                    textFieldValue?.let {
+                                        navigator.loadUrl(it)
+                                    }
+                                },
+                                modifier = Modifier.align(Alignment.CenterVertically)
+                            ) {
+                                Text("Go")
+                            }
+                        }
+
+                        val loadingState = state.loadingState
+                        if (loadingState is LoadingState.Loading) {
+                            LinearProgressIndicator(
+                                progress = { loadingState.progress },
+                                modifier = Modifier.fillMaxWidth(),
                             )
                         }
 
-                        Button(
-                            onClick = {
-                                textFieldValue?.let {
-                                    navigator.loadUrl(it)
+                        // A custom WebViewClient and WebChromeClient can be provided via subclassing
+                        val webClient = remember {
+                            object : AccompanistWebViewClient() {
+                                override fun onPageStarted(
+                                    view: WebView,
+                                    url: String?,
+                                    favicon: Bitmap?
+                                ) {
+                                    super.onPageStarted(view, url, favicon)
+                                    Log.d("Accompanist WebView", "Page started loading for $url")
                                 }
-                            },
-                            modifier = Modifier.align(Alignment.CenterVertically)
-                        ) {
-                            Text("Go")
-                        }
-                    }
-
-                    val loadingState = state.loadingState
-                    if (loadingState is LoadingState.Loading) {
-                        LinearProgressIndicator(
-                            progress = { loadingState.progress },
-                            modifier = Modifier.fillMaxWidth(),
-                        )
-                    }
-
-                    // A custom WebViewClient and WebChromeClient can be provided via subclassing
-                    val webClient = remember {
-                        object : AccompanistWebViewClient() {
-                            override fun onPageStarted(
-                                view: WebView,
-                                url: String?,
-                                favicon: Bitmap?
-                            ) {
-                                super.onPageStarted(view, url, favicon)
-                                Log.d("Accompanist WebView", "Page started loading for $url")
                             }
                         }
-                    }
 
-                    WebView(
-                        state = state,
-                        modifier = Modifier
-                            .weight(1f),
-                        navigator = navigator,
-                        onCreated = { webView ->
-                            webView.settings.javaScriptEnabled = true
-                        },
-                        client = webClient
-                    )
+                        WebView(
+                            state = state,
+                            modifier = Modifier
+                                .weight(1f),
+                            navigator = navigator,
+                            onCreated = { webView ->
+                                webView.settings.javaScriptEnabled = true
+                            },
+                            client = webClient
+                        )
+                    }
                 }
             }
         }

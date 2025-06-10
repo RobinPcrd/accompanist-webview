@@ -7,23 +7,26 @@ captures
 /local.properties
 
 # IntelliJ .idea folder
-.idea/workspace.xml
-.idea/libraries
-.idea/caches
-.idea/navEditor.xml
-.idea/tasks.xml
-.idea/modules.xml
-.idea/compiler.xml
-.idea/jarRepositories.xml
-.idea/deploymentTargetDropDown.xml
-.idea/misc.xml
-.idea/androidTestResultsUserPreferences.xml
-.idea/.name
-.idea/deploymentTargetSelector.xml
-.idea/migrations.xml
-.idea/other.xml
-gradle.xml
 *.iml
+.idea/.name
+.idea/AndroidProjectSystem.xml
+.idea/androidTestResultsUserPreferences.xml
+.idea/caches
+.idea/compiler.xml
+.idea/deploymentTargetDropDown.xml
+.idea/deploymentTargetSelector.xml
+.idea/deviceManager.xml
+.idea/jarRepositories.xml
+.idea/libraries
+.idea/migrations.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/navEditor.xml
+.idea/other.xml
+.idea/runConfigurations.xml
+.idea/tasks.xml
+.idea/workspace.xml
+gradle.xml
 
 # General
 .DS_Store

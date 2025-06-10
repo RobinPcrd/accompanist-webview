@@ -20,9 +20,12 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -38,11 +41,14 @@ import kotlin.time.Duration.Companion.seconds
 class WebViewJsSample : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         setContent {
             MaterialTheme {
-                Surface {
-                    Column(Modifier.fillMaxSize()) {
-                        Home()
+                Scaffold {
+                    Surface(modifier = Modifier.padding(it)) {
+                        Column(Modifier.fillMaxSize()) {
+                            Home()
+                        }
                     }
                 }
             }
@@ -60,7 +66,7 @@ private fun Home() {
         val bundle = webViewState.viewState
         if (bundle == null) {
             // This is the first time load, so load the home page.
-            navigator.loadUrl("https://bbc.com")
+            navigator.loadUrl("https://wikipedia.org")
         }
     }
 
@@ -72,6 +78,11 @@ private fun Home() {
                     delay(1.seconds)
                     webViewState.webView?.evaluateJavascript(
                         "window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});",
+                        null
+                    )
+                    delay(1.seconds)
+                    webViewState.webView?.evaluateJavascript(
+                        "window.scrollTo({top: 0, behavior: 'smooth'});",
                         null
                     )
                 }

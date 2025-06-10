@@ -23,12 +23,12 @@ plugins {
 }
 
 android {
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "io.github.robinpcrd.accompanist.sample"
         minSdk = 21
-        targetSdk = 33
+        targetSdk = 36
 
         versionCode = 1
         versionName = "1.0"

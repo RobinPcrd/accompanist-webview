@@ -25,7 +25,7 @@ plugins {
 android {
     namespace = "com.google.accompanist.internal.test"
 
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         minSdk = 21

@@ -19,15 +19,18 @@ package com.google.accompanist.sample.webview
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.ModalBottomSheetLayout
 import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -42,24 +45,27 @@ import kotlinx.coroutines.launch
 class WrappedContentWebViewSample : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         setContent {
             MaterialTheme {
-                Surface {
-                    val sheetState = rememberModalBottomSheetState(
-                        initialValue = ModalBottomSheetValue.Hidden
-                    )
-                    ModalBottomSheetLayout(
-                        sheetState = sheetState,
-                        sheetContent = {
-                            WrappingWebContent("Hello")
-                        }
-                    ) {
-                        val scope = rememberCoroutineScope()
-                        Box(Modifier.fillMaxSize()) {
-                            Button(onClick = {
-                                scope.launch { sheetState.show() }
-                            }, Modifier.align(Alignment.Center)) {
-                                Text("Open Sheet")
+                Scaffold {
+                    Surface(modifier = Modifier.padding(it)) {
+                        val sheetState = rememberModalBottomSheetState(
+                            initialValue = ModalBottomSheetValue.Hidden
+                        )
+                        ModalBottomSheetLayout(
+                            sheetState = sheetState,
+                            sheetContent = {
+                                WrappingWebContent("Hello")
+                            }
+                        ) {
+                            val scope = rememberCoroutineScope()
+                            Box(Modifier.fillMaxSize()) {
+                                Button(onClick = {
+                                    scope.launch { sheetState.show() }
+                                }, Modifier.align(Alignment.Center)) {
+                                    Text("Open Sheet")
+                                }
                             }
                         }
                     }

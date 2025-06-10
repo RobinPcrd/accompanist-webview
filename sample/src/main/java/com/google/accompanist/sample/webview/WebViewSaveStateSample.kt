@@ -20,13 +20,16 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -46,28 +49,31 @@ import kotlin.time.Duration.Companion.seconds
 class WebViewSaveStateSample : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         setContent {
             MaterialTheme {
-                Surface {
-                    val navController = rememberNavController()
-                    Column(Modifier.fillMaxSize()) {
-                        Row {
-                            Button(onClick = { navController.popBackStack() }) {
-                                Text("Home")
+                Scaffold {
+                    Surface(modifier = Modifier.padding(it)) {
+                        val navController = rememberNavController()
+                        Column(Modifier.fillMaxSize()) {
+                            Row {
+                                Button(onClick = { navController.popBackStack() }) {
+                                    Text("Home")
+                                }
+                                Button(onClick = { navController.navigate("detail") }) {
+                                    Text("Detail")
+                                }
                             }
-                            Button(onClick = { navController.navigate("detail") }) {
-                                Text("Detail")
-                            }
-                        }
 
-                        Spacer(modifier = Modifier.size(16.dp))
+                            Spacer(modifier = Modifier.size(16.dp))
 
-                        NavHost(navController = navController, startDestination = "home") {
-                            composable("home") {
-                                Home()
-                            }
-                            composable("detail") {
-                                Detail()
+                            NavHost(navController = navController, startDestination = "home") {
+                                composable("home") {
+                                    Home()
+                                }
+                                composable("detail") {
+                                    Detail()
+                                }
                             }
                         }
                     }
@@ -87,7 +93,7 @@ private fun Home() {
         val bundle = webViewState.viewState
         if (bundle == null) {
             // This is the first time load, so load the home page.
-            navigator.loadUrl("https://bbc.com")
+            navigator.loadUrl("https://wikipedia.org")
         }
     }
 
