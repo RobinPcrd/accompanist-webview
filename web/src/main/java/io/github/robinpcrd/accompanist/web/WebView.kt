@@ -44,6 +44,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.viewinterop.AndroidView
 import io.github.robinpcrd.accompanist.web.LoadingState.Finished
 import io.github.robinpcrd.accompanist.web.LoadingState.Loading
@@ -215,26 +216,42 @@ public fun WebView(
     client.navigator = navigator
     chromeClient.state = state
 
-    AndroidView(
-        factory = { context ->
-            (factory?.invoke(context) ?: WebView(context)).apply {
-                onCreated(this)
-
-                this.layoutParams = layoutParams
-
-                state.viewState?.let {
-                    this.restoreState(it)
-                }
-
-                webChromeClient = chromeClient
-                webViewClient = client
-            }.also { state.webView = it }
-        },
-        modifier = modifier,
-        onRelease = {
-            onDispose(it)
+    // WebView instantiation can fail at runtime (e.g. the WebView provider is being updated,
+    // or another process holds the WebView data directory lock - crbug.com/558377). Creating
+    // it here instead of inside the AndroidView factory makes the failure catchable: the
+    // factory has to return a View and cannot recover.
+    val context = LocalContext.current
+    val webViewInstance = remember {
+        try {
+            factory?.invoke(context) ?: WebView(context)
+        } catch (t: Throwable) {
+            state.creationError = t
+            null
         }
-    )
+    }
+
+    if (webViewInstance != null) {
+        AndroidView(
+            factory = { _ ->
+                webViewInstance.apply {
+                    onCreated(this)
+
+                    this.layoutParams = layoutParams
+
+                    state.viewState?.let {
+                        this.restoreState(it)
+                    }
+
+                    webChromeClient = chromeClient
+                    webViewClient = client
+                }.also { state.webView = it }
+            },
+            modifier = modifier,
+            onRelease = {
+                onDispose(it)
+            }
+        )
+    }
 }
 
 /**
@@ -439,6 +456,15 @@ public class WebViewState(webContent: WebContent) {
     // We need access to this in the state saver. An internal DisposableEffect or AndroidView
     // onDestroy is called after the state saver and so can't be used.
     public var webView: WebView? by mutableStateOf<WebView?>(null)
+        internal set
+
+    /**
+     * Set when the underlying WebView could not be instantiated, e.g. the WebView provider is
+     * being updated, or another process holds the WebView data directory lock
+     * (https://crbug.com/558377). When non-null the WebView composable renders nothing;
+     * observe this to show a fallback UI.
+     */
+    public var creationError: Throwable? by mutableStateOf(null)
         internal set
 }
 

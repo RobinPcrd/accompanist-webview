@@ -127,6 +127,7 @@ package io.github.robinpcrd.accompanist.web {
   @androidx.compose.runtime.Stable public final class WebViewState {
     ctor public WebViewState(io.github.robinpcrd.accompanist.web.WebContent webContent);
     method public io.github.robinpcrd.accompanist.web.WebContent getContent();
+    method public Throwable? getCreationError();
     method public androidx.compose.runtime.snapshots.SnapshotStateList<io.github.robinpcrd.accompanist.web.WebViewError> getErrorsForCurrentRequest();
     method public String? getLastLoadedUrl();
     method public io.github.robinpcrd.accompanist.web.LoadingState getLoadingState();
@@ -137,6 +138,7 @@ package io.github.robinpcrd.accompanist.web {
     method public boolean isLoading();
     method public void setContent(io.github.robinpcrd.accompanist.web.WebContent);
     property public final io.github.robinpcrd.accompanist.web.WebContent content;
+    property public final Throwable? creationError;
     property public final androidx.compose.runtime.snapshots.SnapshotStateList<io.github.robinpcrd.accompanist.web.WebViewError> errorsForCurrentRequest;
     property public final boolean isLoading;
     property public final String? lastLoadedUrl;
