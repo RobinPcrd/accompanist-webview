@@ -644,6 +644,25 @@ class WebTest {
     }
 
     @Test
+    fun testRenderProcessCrashDoesNotCrashApp() {
+        lateinit var state: WebViewState
+        var isOnDisposeCalled = false
+
+        rule.setContent {
+            state = rememberWebViewStateWithHTMLData(data = TEST_DATA)
+            WebTestContent(state, idleResource, onDispose = { isOnDisposeCalled = true })
+        }
+
+        rule.waitForIdle()
+        rule.runOnUiThread { state.webView?.loadUrl("chrome://crash") }
+        rule.waitUntil(timeoutMillis = 10_000L) { state.creationError != null }
+        rule.waitForIdle()
+
+        assertThat(state.webView).isNull()
+        assertThat(isOnDisposeCalled).isTrue()
+    }
+
+    @Test
     fun testJSReloadTriggersRefresh() {
         lateinit var state: WebViewState
         var pageStartedCalled = 0

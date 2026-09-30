@@ -20,6 +20,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.ViewGroup.LayoutParams
+import android.webkit.RenderProcessGoneDetail
 import android.webkit.WebChromeClient
 import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
@@ -27,6 +28,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.FrameLayout
 import androidx.activity.compose.BackHandler
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
@@ -166,7 +168,7 @@ public fun WebView(
 ) {
     val webView = state.webView
 
-    BackHandler(captureBackPresses && navigator.canGoBack) {
+    BackHandler(captureBackPresses && webView != null && navigator.canGoBack) {
         webView?.goBack()
     }
 
@@ -230,7 +232,7 @@ public fun WebView(
         }
     }
 
-    if (webViewInstance != null) {
+    if (webViewInstance != null && state.creationError == null) {
         AndroidView(
             factory = { _ ->
                 webViewInstance.apply {
@@ -300,6 +302,16 @@ public open class AccompanistWebViewClient : WebViewClient() {
         if (error != null) {
             state.errorsForCurrentRequest.add(WebViewError(request, error))
         }
+    }
+
+    @RequiresApi(26)
+    override fun onRenderProcessGone(view: WebView, detail: RenderProcessGoneDetail): Boolean {
+        // Returning false makes WebView crash (or kill) the whole app process.
+        state.webView = null
+        state.creationError = IllegalStateException(
+            "WebView render process gone (didCrash=${detail.didCrash()})"
+        )
+        return true
     }
 }
 
@@ -461,8 +473,8 @@ public class WebViewState(webContent: WebContent) {
     /**
      * Set when the underlying WebView could not be instantiated, e.g. the WebView provider is
      * being updated, or another process holds the WebView data directory lock
-     * (https://crbug.com/558377). When non-null the WebView composable renders nothing;
-     * observe this to show a fallback UI.
+     * (https://crbug.com/558377), or when its render process crashed or was killed. When
+     * non-null the WebView composable renders nothing; observe this to show a fallback UI.
      */
     public var creationError: Throwable? by mutableStateOf(null)
         internal set
