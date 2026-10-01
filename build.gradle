@@ -1,4 +1,4 @@
-import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
+import org.jetbrains.kotlin.gradle.dsl.JvmDefaultMode
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -46,9 +46,15 @@ plugins {
 apply plugin: 'com.dropbox.affectedmoduledetector'
 apply plugin: 'com.diffplug.spotless'
 
-tasks.withType(DokkaMultiModuleTask).configureEach {
-    outputDirectory = rootProject.file('docs/api')
-    failOnWarning = true
+dokka {
+    dokkaPublications.html {
+        outputDirectory.set(rootProject.file('docs/api'))
+        failOnWarning.set(true)
+    }
+}
+
+dependencies {
+    dokka project(':web')
 }
 
 affectedModuleDetector {
@@ -129,12 +135,12 @@ subprojects {
         compilerOptions {
             // Treat all Kotlin warnings as errors
             allWarningsAsErrors = true
-            // Set JVM target to 1.8
-            jvmTarget = JvmTarget.JVM_1_8
+            // Set JVM target to 11
+            jvmTarget = JvmTarget.JVM_11
             // Allow use of @OptIn
             freeCompilerArgs.add("-opt-in=kotlin.RequiresOptIn")
             // Enable default methods in interfaces
-            freeCompilerArgs.add("-Xjvm-default=all")
+            jvmDefault = JvmDefaultMode.NO_COMPATIBILITY
         }
     }
 
@@ -156,12 +162,12 @@ subprojects {
     // Must be afterEvaluate or else com.vanniktech.maven.publish will overwrite our
     // dokka and version configuration.
     afterEvaluate {
-        if (tasks.findByName('dokkaHtmlPartial') == null) {
+        if (!plugins.hasPlugin('org.jetbrains.dokka')) {
             // If dokka isn't enabled on this module, skip
             return
         }
 
-        tasks.named('dokkaHtmlPartial') {
+        dokka {
             dokkaSourceSets.configureEach {
                 reportUndocumented.set(true)
                 skipEmptyPackages.set(true)
@@ -169,25 +175,25 @@ subprojects {
                 jdkVersion.set(8)
 
                 // Add Android SDK packages
-                noAndroidSdkLink.set(false)
+                enableAndroidDocumentationLink.set(true)
 
                 // Add samples from :sample module
                 samples.from(rootProject.file("sample/src/main/java/"))
 
                 // AndroidX + Compose docs
-                externalDocumentationLink {
-                    url.set(new URL("https://developer.android.com/reference/"))
-                    packageListUrl.set(new URL("https://developer.android.com/reference/androidx/package-list"))
+                externalDocumentationLinks.register("androidx") {
+                    url.set(new URI("https://developer.android.com/reference/"))
+                    packageListUrl.set(new URI("https://developer.android.com/reference/androidx/package-list"))
                 }
-                externalDocumentationLink {
-                    url.set(new URL("https://developer.android.com/reference/kotlin/"))
-                    packageListUrl.set(new URL("https://developer.android.com/reference/kotlin/androidx/package-list"))
+                externalDocumentationLinks.register("androidx-kotlin") {
+                    url.set(new URI("https://developer.android.com/reference/kotlin/"))
+                    packageListUrl.set(new URI("https://developer.android.com/reference/kotlin/androidx/package-list"))
                 }
 
                 sourceLink {
                     localDirectory.set(project.file("src/main/java"))
                     // URL showing where the source code can be accessed through the web browser
-                    remoteUrl.set(new URL("https://github.com/google/accompanist/blob/main/${project.name}/src/main/java"))
+                    remoteUrl.set(new URI("https://github.com/google/accompanist/blob/main/${project.name}/src/main/java"))
                     // Suffix which is used to append the line number to the URL. Use #L for GitHub
                     remoteLineSuffix.set("#L")
                 }

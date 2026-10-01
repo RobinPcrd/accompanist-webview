@@ -17,7 +17,6 @@
 
 plugins {
     id(libs.plugins.android.library.get().pluginId)
-    id(libs.plugins.android.kotlin.get().pluginId)
 
     alias(libs.plugins.compose.compiler)
 }
@@ -25,16 +24,16 @@ plugins {
 android {
     namespace = "com.google.accompanist.internal.test"
 
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
-        minSdk = 21
+        minSdk = 23
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     buildFeatures {

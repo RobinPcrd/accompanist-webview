@@ -17,17 +17,16 @@
 
 plugins {
     id(libs.plugins.android.application.get().pluginId)
-    id(libs.plugins.android.kotlin.get().pluginId)
 
     alias(libs.plugins.compose.compiler)
 }
 
 android {
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "io.github.robinpcrd.accompanist.sample"
-        minSdk = 21
+        minSdk = 23
         targetSdk = 36
 
         versionCode = 1
@@ -37,8 +36,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     buildFeatures {

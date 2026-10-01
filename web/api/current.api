@@ -3,22 +3,22 @@ package io.github.robinpcrd.accompanist.web {
 
   public class AccompanistWebChromeClient extends android.webkit.WebChromeClient {
     ctor public AccompanistWebChromeClient();
-    method public io.github.robinpcrd.accompanist.web.WebViewState getState();
+    method @InaccessibleFromKotlin public io.github.robinpcrd.accompanist.web.WebViewState getState();
     property public io.github.robinpcrd.accompanist.web.WebViewState state;
     field public io.github.robinpcrd.accompanist.web.WebViewState state;
   }
 
   public class AccompanistWebViewClient extends android.webkit.WebViewClient {
     ctor public AccompanistWebViewClient();
-    method public io.github.robinpcrd.accompanist.web.WebViewNavigator getNavigator();
-    method public io.github.robinpcrd.accompanist.web.WebViewState getState();
+    method @InaccessibleFromKotlin public io.github.robinpcrd.accompanist.web.WebViewNavigator getNavigator();
+    method @InaccessibleFromKotlin public io.github.robinpcrd.accompanist.web.WebViewState getState();
     property public io.github.robinpcrd.accompanist.web.WebViewNavigator navigator;
     property public io.github.robinpcrd.accompanist.web.WebViewState state;
     field public io.github.robinpcrd.accompanist.web.WebViewNavigator navigator;
     field public io.github.robinpcrd.accompanist.web.WebViewState state;
   }
 
-  public abstract sealed class LoadingState {
+  public abstract sealed exhaustive class LoadingState {
   }
 
   public static final class LoadingState.Finished extends io.github.robinpcrd.accompanist.web.LoadingState {
@@ -32,12 +32,12 @@ package io.github.robinpcrd.accompanist.web {
   public static final class LoadingState.Loading extends io.github.robinpcrd.accompanist.web.LoadingState {
     ctor public LoadingState.Loading(float progress);
     method public float component1();
-    method public io.github.robinpcrd.accompanist.web.LoadingState.Loading copy(float progress);
-    method public float getProgress();
-    property public final float progress;
+    method public io.github.robinpcrd.accompanist.web.LoadingState.Loading copy(optional float progress);
+    method @InaccessibleFromKotlin public float getProgress();
+    property public float progress;
   }
 
-  public abstract sealed class WebContent {
+  public abstract sealed exhaustive class WebContent {
   }
 
   public static final class WebContent.Data extends io.github.robinpcrd.accompanist.web.WebContent {
@@ -47,17 +47,17 @@ package io.github.robinpcrd.accompanist.web {
     method public String component3();
     method public String? component4();
     method public String? component5();
-    method public io.github.robinpcrd.accompanist.web.WebContent.Data copy(String data, String? baseUrl, String encoding, String? mimeType, String? historyUrl);
-    method public String? getBaseUrl();
-    method public String getData();
-    method public String getEncoding();
-    method public String? getHistoryUrl();
-    method public String? getMimeType();
-    property public final String? baseUrl;
-    property public final String data;
-    property public final String encoding;
-    property public final String? historyUrl;
-    property public final String? mimeType;
+    method public io.github.robinpcrd.accompanist.web.WebContent.Data copy(optional String data, optional String? baseUrl, optional String encoding, optional String? mimeType, optional String? historyUrl);
+    method @InaccessibleFromKotlin public String? getBaseUrl();
+    method @InaccessibleFromKotlin public String getData();
+    method @InaccessibleFromKotlin public String getEncoding();
+    method @InaccessibleFromKotlin public String? getHistoryUrl();
+    method @InaccessibleFromKotlin public String? getMimeType();
+    property public String? baseUrl;
+    property public String data;
+    property public String encoding;
+    property public String? historyUrl;
+    property public String? mimeType;
   }
 
   public static final class WebContent.NavigatorOnly extends io.github.robinpcrd.accompanist.web.WebContent {
@@ -68,51 +68,51 @@ package io.github.robinpcrd.accompanist.web {
     ctor public WebContent.Post(String url, byte[] postData);
     method public String component1();
     method public byte[] component2();
-    method public io.github.robinpcrd.accompanist.web.WebContent.Post copy(String url, byte[] postData);
-    method public byte[] getPostData();
-    method public String getUrl();
-    property public final byte[] postData;
-    property public final String url;
+    method public io.github.robinpcrd.accompanist.web.WebContent.Post copy(optional String url, optional byte[] postData);
+    method @InaccessibleFromKotlin public byte[] getPostData();
+    method @InaccessibleFromKotlin public String getUrl();
+    property public byte[] postData;
+    property public String url;
   }
 
   public static final class WebContent.Url extends io.github.robinpcrd.accompanist.web.WebContent {
     ctor public WebContent.Url(String url, optional java.util.Map<java.lang.String,java.lang.String> additionalHttpHeaders);
     method public String component1();
     method public java.util.Map<java.lang.String,java.lang.String> component2();
-    method public io.github.robinpcrd.accompanist.web.WebContent.Url copy(String url, java.util.Map<java.lang.String,java.lang.String> additionalHttpHeaders);
-    method public java.util.Map<java.lang.String,java.lang.String> getAdditionalHttpHeaders();
-    method public String getUrl();
-    property public final java.util.Map<java.lang.String,java.lang.String> additionalHttpHeaders;
-    property public final String url;
+    method public io.github.robinpcrd.accompanist.web.WebContent.Url copy(optional String url, optional java.util.Map<java.lang.String,java.lang.String> additionalHttpHeaders);
+    method @InaccessibleFromKotlin public java.util.Map<java.lang.String,java.lang.String> getAdditionalHttpHeaders();
+    method @InaccessibleFromKotlin public String getUrl();
+    property public java.util.Map<java.lang.String,java.lang.String> additionalHttpHeaders;
+    property public String url;
   }
 
   @androidx.compose.runtime.Immutable public final class WebViewError {
     ctor public WebViewError(android.webkit.WebResourceRequest? request, android.webkit.WebResourceError error);
     method public android.webkit.WebResourceRequest? component1();
     method public android.webkit.WebResourceError component2();
-    method public io.github.robinpcrd.accompanist.web.WebViewError copy(android.webkit.WebResourceRequest? request, android.webkit.WebResourceError error);
-    method public android.webkit.WebResourceError getError();
-    method public android.webkit.WebResourceRequest? getRequest();
-    property public final android.webkit.WebResourceError error;
-    property public final android.webkit.WebResourceRequest? request;
+    method public io.github.robinpcrd.accompanist.web.WebViewError copy(optional android.webkit.WebResourceRequest? request, optional android.webkit.WebResourceError error);
+    method @InaccessibleFromKotlin public android.webkit.WebResourceError getError();
+    method @InaccessibleFromKotlin public android.webkit.WebResourceRequest? getRequest();
+    property public android.webkit.WebResourceError error;
+    property public android.webkit.WebResourceRequest? request;
   }
 
   public final class WebViewKt {
-    method @androidx.compose.runtime.Composable public static void WebView(io.github.robinpcrd.accompanist.web.WebViewState state, android.widget.FrameLayout.LayoutParams layoutParams, optional androidx.compose.ui.Modifier modifier, optional boolean captureBackPresses, optional io.github.robinpcrd.accompanist.web.WebViewNavigator navigator, optional kotlin.jvm.functions.Function1<? super android.webkit.WebView,kotlin.Unit> onCreated, optional kotlin.jvm.functions.Function1<? super android.webkit.WebView,kotlin.Unit> onDispose, optional io.github.robinpcrd.accompanist.web.AccompanistWebViewClient client, optional io.github.robinpcrd.accompanist.web.AccompanistWebChromeClient chromeClient, optional kotlin.jvm.functions.Function1<? super android.content.Context,? extends android.webkit.WebView>? factory);
-    method @androidx.compose.runtime.Composable public static void WebView(io.github.robinpcrd.accompanist.web.WebViewState state, optional androidx.compose.ui.Modifier modifier, optional boolean captureBackPresses, optional io.github.robinpcrd.accompanist.web.WebViewNavigator navigator, optional kotlin.jvm.functions.Function1<? super android.webkit.WebView,kotlin.Unit> onCreated, optional kotlin.jvm.functions.Function1<? super android.webkit.WebView,kotlin.Unit> onDispose, optional io.github.robinpcrd.accompanist.web.AccompanistWebViewClient client, optional io.github.robinpcrd.accompanist.web.AccompanistWebChromeClient chromeClient, optional kotlin.jvm.functions.Function1<? super android.content.Context,? extends android.webkit.WebView>? factory);
-    method public static androidx.compose.runtime.saveable.Saver<io.github.robinpcrd.accompanist.web.WebViewState,java.lang.Object> getWebStateSaver();
-    method @androidx.compose.runtime.Composable public static io.github.robinpcrd.accompanist.web.WebViewState rememberSaveableWebViewState();
-    method @androidx.compose.runtime.Composable public static io.github.robinpcrd.accompanist.web.WebViewNavigator rememberWebViewNavigator(optional kotlinx.coroutines.CoroutineScope coroutineScope);
-    method @androidx.compose.runtime.Composable public static io.github.robinpcrd.accompanist.web.WebViewState rememberWebViewState(String url, byte[] postData);
-    method @androidx.compose.runtime.Composable public static io.github.robinpcrd.accompanist.web.WebViewState rememberWebViewState(String url, optional java.util.Map<java.lang.String,java.lang.String> additionalHttpHeaders);
-    method @androidx.compose.runtime.Composable public static io.github.robinpcrd.accompanist.web.WebViewState rememberWebViewStateWithHTMLData(String data, optional String? baseUrl, optional String encoding, optional String? mimeType, optional String? historyUrl);
-    property public static final androidx.compose.runtime.saveable.Saver<io.github.robinpcrd.accompanist.web.WebViewState,java.lang.Object> WebStateSaver;
+    method @KotlinOnly @androidx.compose.runtime.Composable public static void WebView(io.github.robinpcrd.accompanist.web.WebViewState state, android.widget.FrameLayout.LayoutParams layoutParams, optional androidx.compose.ui.Modifier modifier, optional boolean captureBackPresses, optional io.github.robinpcrd.accompanist.web.WebViewNavigator navigator, optional kotlin.jvm.functions.Function1<android.webkit.WebView,kotlin.Unit> onCreated, optional kotlin.jvm.functions.Function1<android.webkit.WebView,kotlin.Unit> onDispose, optional io.github.robinpcrd.accompanist.web.AccompanistWebViewClient client, optional io.github.robinpcrd.accompanist.web.AccompanistWebChromeClient chromeClient, optional kotlin.jvm.functions.Function1<android.content.Context,android.webkit.WebView>? factory);
+    method @KotlinOnly @androidx.compose.runtime.Composable public static void WebView(io.github.robinpcrd.accompanist.web.WebViewState state, optional androidx.compose.ui.Modifier modifier, optional boolean captureBackPresses, optional io.github.robinpcrd.accompanist.web.WebViewNavigator navigator, optional kotlin.jvm.functions.Function1<android.webkit.WebView,kotlin.Unit> onCreated, optional kotlin.jvm.functions.Function1<android.webkit.WebView,kotlin.Unit> onDispose, optional io.github.robinpcrd.accompanist.web.AccompanistWebViewClient client, optional io.github.robinpcrd.accompanist.web.AccompanistWebChromeClient chromeClient, optional kotlin.jvm.functions.Function1<android.content.Context,android.webkit.WebView>? factory);
+    method @InaccessibleFromKotlin public static androidx.compose.runtime.saveable.Saver<io.github.robinpcrd.accompanist.web.WebViewState,java.lang.Object> getWebStateSaver();
+    method @KotlinOnly @androidx.compose.runtime.Composable public static io.github.robinpcrd.accompanist.web.WebViewState rememberSaveableWebViewState();
+    method @KotlinOnly @androidx.compose.runtime.Composable public static io.github.robinpcrd.accompanist.web.WebViewNavigator rememberWebViewNavigator(optional kotlinx.coroutines.CoroutineScope coroutineScope);
+    method @KotlinOnly @androidx.compose.runtime.Composable public static io.github.robinpcrd.accompanist.web.WebViewState rememberWebViewState(String url, byte[] postData);
+    method @KotlinOnly @androidx.compose.runtime.Composable public static io.github.robinpcrd.accompanist.web.WebViewState rememberWebViewState(String url, optional java.util.Map<java.lang.String,java.lang.String> additionalHttpHeaders);
+    method @KotlinOnly @androidx.compose.runtime.Composable public static io.github.robinpcrd.accompanist.web.WebViewState rememberWebViewStateWithHTMLData(String data, optional String? baseUrl, optional String encoding, optional String? mimeType, optional String? historyUrl);
+    property public static androidx.compose.runtime.saveable.Saver<io.github.robinpcrd.accompanist.web.WebViewState,java.lang.Object> WebStateSaver;
   }
 
   @androidx.compose.runtime.Stable public final class WebViewNavigator {
     ctor public WebViewNavigator(kotlinx.coroutines.CoroutineScope coroutineScope);
-    method public boolean getCanGoBack();
-    method public boolean getCanGoForward();
+    method @InaccessibleFromKotlin public boolean getCanGoBack();
+    method @InaccessibleFromKotlin public boolean getCanGoForward();
     method public void loadHtml(String html, optional String? baseUrl, optional String? mimeType, optional String? encoding, optional String? historyUrl);
     method public void loadUrl(String url, optional java.util.Map<java.lang.String,java.lang.String> additionalHttpHeaders);
     method public void navigateBack();
@@ -120,33 +120,33 @@ package io.github.robinpcrd.accompanist.web {
     method public void postUrl(String url, byte[] postData);
     method public void reload();
     method public void stopLoading();
-    property public final boolean canGoBack;
-    property public final boolean canGoForward;
+    property public boolean canGoBack;
+    property public boolean canGoForward;
   }
 
   @androidx.compose.runtime.Stable public final class WebViewState {
     ctor public WebViewState(io.github.robinpcrd.accompanist.web.WebContent webContent);
-    method public io.github.robinpcrd.accompanist.web.WebContent getContent();
-    method public Throwable? getCreationError();
-    method public androidx.compose.runtime.snapshots.SnapshotStateList<io.github.robinpcrd.accompanist.web.WebViewError> getErrorsForCurrentRequest();
-    method public String? getLastLoadedUrl();
-    method public io.github.robinpcrd.accompanist.web.LoadingState getLoadingState();
-    method public android.graphics.Bitmap? getPageIcon();
-    method public String? getPageTitle();
-    method public android.os.Bundle? getViewState();
-    method public android.webkit.WebView? getWebView();
-    method public boolean isLoading();
-    method public void setContent(io.github.robinpcrd.accompanist.web.WebContent);
-    property public final io.github.robinpcrd.accompanist.web.WebContent content;
-    property public final Throwable? creationError;
-    property public final androidx.compose.runtime.snapshots.SnapshotStateList<io.github.robinpcrd.accompanist.web.WebViewError> errorsForCurrentRequest;
-    property public final boolean isLoading;
-    property public final String? lastLoadedUrl;
-    property public final io.github.robinpcrd.accompanist.web.LoadingState loadingState;
-    property public final android.graphics.Bitmap? pageIcon;
-    property public final String? pageTitle;
-    property public final android.os.Bundle? viewState;
-    property public final android.webkit.WebView? webView;
+    method @InaccessibleFromKotlin public io.github.robinpcrd.accompanist.web.WebContent getContent();
+    method @InaccessibleFromKotlin public Throwable? getCreationError();
+    method @InaccessibleFromKotlin public androidx.compose.runtime.snapshots.SnapshotStateList<io.github.robinpcrd.accompanist.web.WebViewError> getErrorsForCurrentRequest();
+    method @InaccessibleFromKotlin public String? getLastLoadedUrl();
+    method @InaccessibleFromKotlin public io.github.robinpcrd.accompanist.web.LoadingState getLoadingState();
+    method @InaccessibleFromKotlin public android.graphics.Bitmap? getPageIcon();
+    method @InaccessibleFromKotlin public String? getPageTitle();
+    method @InaccessibleFromKotlin public android.os.Bundle? getViewState();
+    method @InaccessibleFromKotlin public android.webkit.WebView? getWebView();
+    method @InaccessibleFromKotlin public boolean isLoading();
+    method @InaccessibleFromKotlin public void setContent(io.github.robinpcrd.accompanist.web.WebContent);
+    property public io.github.robinpcrd.accompanist.web.WebContent content;
+    property public Throwable? creationError;
+    property public androidx.compose.runtime.snapshots.SnapshotStateList<io.github.robinpcrd.accompanist.web.WebViewError> errorsForCurrentRequest;
+    property public boolean isLoading;
+    property public String? lastLoadedUrl;
+    property public io.github.robinpcrd.accompanist.web.LoadingState loadingState;
+    property public android.graphics.Bitmap? pageIcon;
+    property public String? pageTitle;
+    property public android.os.Bundle? viewState;
+    property public android.webkit.WebView? webView;
   }
 
 }

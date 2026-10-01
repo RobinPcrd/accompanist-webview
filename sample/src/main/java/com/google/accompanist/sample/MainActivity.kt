@@ -69,8 +69,7 @@ class MainActivity : ListActivity() {
         val entries = HashMap<String, Boolean>()
 
         list.forEach { info ->
-            val labelSeq = info.loadLabel(packageManager)
-            val label = labelSeq?.toString() ?: info.activityInfo.name
+            val label = info.loadLabel(packageManager).toString()
 
             if (prefixWithSlash.isNullOrEmpty() || label.startsWith(prefixWithSlash)) {
                 val labelPath = label.split("/".toRegex()).toTypedArray()

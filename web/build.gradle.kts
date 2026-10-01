@@ -15,11 +15,8 @@
  */
 @file:Suppress("UnstableApiUsage")
 
-import com.vanniktech.maven.publish.SonatypeHost
-
 plugins {
     id(libs.plugins.android.library.get().pluginId)
-    id(libs.plugins.android.kotlin.get().pluginId)
     id(libs.plugins.jetbrains.dokka.get().pluginId)
     id(libs.plugins.gradle.metalava.get().pluginId)
     id(libs.plugins.vanniktech.maven.publish.get().pluginId)
@@ -34,18 +31,16 @@ kotlin {
 android {
     namespace = "io.github.robinpcrd.accompanist.web"
 
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
-        minSdk = 21
-        // targetSdkVersion has no effect for libraries. This is only used for the test APK
-        targetSdk = 36
+        minSdk = 23
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     buildFeatures {
@@ -74,25 +69,25 @@ android {
             isIncludeAndroidResources = true
         }
         animationsDisabled = true
+        // Only used for the test APK
+        targetSdk = 36
     }
 
     sourceSets {
         named("test") {
-            java.srcDirs("src/sharedTest/kotlin")
-            res.srcDirs("src/sharedTest/res")
+            kotlin.directories += "src/sharedTest/kotlin"
+            res.directories += "src/sharedTest/res"
         }
         named("androidTest") {
-            java.srcDirs("src/sharedTest/kotlin")
-            res.srcDirs("src/sharedTest/res")
-            assets.srcDirs("src/androidTest/assets")
+            kotlin.directories += "src/sharedTest/kotlin"
+            res.directories += "src/sharedTest/res"
+            assets.directories += "src/androidTest/assets"
         }
     }
 }
 
 metalava {
-    sourcePaths.setFrom("src/main")
     filename.set("api/current.api")
-    reportLintsAsErrors.set(true)
 }
 
 dependencies {
@@ -135,6 +130,6 @@ dependencies {
 }
 
 mavenPublishing {
-    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL, automaticRelease = true)
+    publishToMavenCentral(automaticRelease = true)
     signAllPublications()
 }
